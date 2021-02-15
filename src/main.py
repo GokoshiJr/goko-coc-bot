@@ -19,6 +19,7 @@ if __name__ == "__main__":
   dispatcher.add_handler(CommandHandler("dev", handlers.dev_social)) 
   dispatcher.add_handler(CommandHandler("balance", handlers.balance))
   dispatcher.add_handler(CommandHandler("war", handlers.war))
+  dispatcher.add_handler(CommandHandler("cwl", handlers.cwl_rules))
 
   # start the Bot
   updater.start_polling() # verifica si esta recibiendo mensajes

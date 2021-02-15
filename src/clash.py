@@ -15,8 +15,15 @@ async def donaciones(client, clan_tag, negativas):
 
 async def war(client, clan_tag) -> str:
   try:
-    war = await client.get_clan_war(clan_tag)
-    result = f"{war.clan.name} vs {war.opponent.name} ({war.type}) \nTamaño: {war.team_size} \nEstatus: {war.state} {war.status} \nMiembros:"
+    war = await client.get_clan_war(clan_tag)    
+    result = f"{war.clan.name} vs {war.opponent.name} ({war.type}) \nTime: \nTamaño: {war.team_size} \nEstatus: {war.state} {war.status} \nMiembros en guerra: \n{miembros(war.members)}"
   except coc.PrivateWarLog:
     result = "El clan posee el registro de guerras privado"
+  return result
+
+def miembros(members) -> str:
+  result = ""
+  for member in members:
+    if not(member.is_opponent):
+      result += f"{member.map_position}. {member.name} TH {member.town_hall} \n"
   return result

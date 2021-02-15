@@ -40,3 +40,10 @@ def war(update, context) -> None:
   logger.info(user.log("solicitó ver el status de guerra del clan."))
   actions.escribiendo(update.message.chat)
   update.message.reply_text(msg)
+
+def cwl_rules(update, context) -> None:   
+  data = update.effective_user
+  user = User(data.first_name, data.last_name, data.username)
+  logger.info(user.log("solicitó ver las reglas de cwl del clan."))
+  actions.escribiendo(update.message.chat)
+  update.message.reply_text(actions.CWL_RULES)
