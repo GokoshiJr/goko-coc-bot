@@ -1,6 +1,6 @@
 from telegram import InlineKeyboardMarkup, InlineKeyboardButton
 
-# dev social
+# keyboard buttons
 dev_telegram = InlineKeyboardButton(
   text="Telegram", 
   url="telegram.me/GokoshiJr"

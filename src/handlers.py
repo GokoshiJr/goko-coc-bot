@@ -49,7 +49,6 @@ def war(update, context) -> None:
 
 def latinos_war(update, context) -> None:
   msg = client.loop.run_until_complete(clash.war(client, keys.LA_TAG))
-  
   query = update.callback_query
   query.answer()
   query.edit_message_text(text=msg)
@@ -58,7 +57,7 @@ def vzla_war(update, context) -> None:
   msg = client.loop.run_until_complete(clash.war(client, keys.VZLA_TAG))  
   query = update.callback_query
   query.answer()
-  query.edit_message_text(text=msg)
+  query.edit_message_text(text=msg, reply_markup=buttons.donaciones_markup)
 
 def cwl_rules(update, context) -> None:   
   data = update.effective_user

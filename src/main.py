@@ -1,11 +1,14 @@
 import telegram, handlers, keys
-from telegram.ext import Updater, CommandHandler, ConversationHandler, CallbackQueryHandler, MessageHandler
-from goko_bot import GokoBot
+from telegram.ext import Updater, CommandHandler, ConversationHandler, CallbackQueryHandler, MessageHandler, Filters
+from goko_bot import GokoBot, SLASH
 
 if __name__ == "__main__": 
   # Initialize the bot
   bot = telegram.Bot(keys.BOT_TOKEN)  
   print(GokoBot(bot.get_me()))
+
+  # Set bot rules
+  bot.set_my_commands(commands=SLASH)
 
   # updater - to listen de user request 
   updater = Updater(token=keys.BOT_TOKEN, use_context=True)
@@ -32,7 +35,9 @@ if __name__ == "__main__":
       CommandHandler("war", handlers.war),
       CallbackQueryHandler(pattern="LatinosWar", callback=handlers.latinos_war),
       CallbackQueryHandler(pattern="VzlaWar", callback=handlers.vzla_war)],
-    states={},
+    states={      
+      # WAR_STATE:[MessageHandler(Filters.text, handlers.balance)]},
+    },
     fallbacks=[],
   ))
 

@@ -1,3 +1,5 @@
+import telegram
+
 class GokoBot(): 
   def __init__(self, bot):
     self.__bot = bot
@@ -33,4 +35,12 @@ class GokoBot():
 
   def __str__(self) -> str:
     return f"El bot {self.__user_name} esta escuchando peticiones."
-  
+
+SLASH = [
+  telegram.BotCommand("start", "Inicia el bot"),
+  telegram.BotCommand("commands", "Muestra un listado de los comandos disponibles"),
+  telegram.BotCommand("cwl", "Muestra las reglas para la clan war league"),
+  telegram.BotCommand("balance", "Muestra los miembros con balance negativo de donaciones"),
+  telegram.BotCommand("war", "Muestra datos sobre la guerra actual"),
+  telegram.BotCommand("dev", "Contacta al desarrollador del bot")
+]
