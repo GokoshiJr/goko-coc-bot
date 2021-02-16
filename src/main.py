@@ -1,5 +1,5 @@
 import telegram, handlers, keys
-from telegram.ext import Updater, CommandHandler
+from telegram.ext import Updater, CommandHandler, ConversationHandler, CallbackQueryHandler, MessageHandler
 from goko_bot import GokoBot
 
 if __name__ == "__main__": 
@@ -13,13 +13,28 @@ if __name__ == "__main__":
   # get the dispatcher to register handlers
   dispatcher = updater.dispatcher
 
-  # on different commands - answer in Telegram
+  # handlers
   dispatcher.add_handler(CommandHandler("start", handlers.start))
   dispatcher.add_handler(CommandHandler("commands", handlers.commands)) 
-  dispatcher.add_handler(CommandHandler("dev", handlers.dev_social)) 
-  dispatcher.add_handler(CommandHandler("balance", handlers.balance))
-  dispatcher.add_handler(CommandHandler("war", handlers.war))
+  dispatcher.add_handler(CommandHandler("dev", handlers.dev_social))
   dispatcher.add_handler(CommandHandler("cwl", handlers.cwl_rules))
+
+  # conversations handlers - callbacks 
+  dispatcher.add_handler(ConversationHandler(
+    entry_points=[
+      CommandHandler("balance", handlers.balance),
+      CallbackQueryHandler(pattern="LatinosArmy", callback=handlers.callback_balance)],
+    states={},
+    fallbacks=[],
+  ))
+  dispatcher.add_handler(ConversationHandler(
+    entry_points=[
+      CommandHandler("war", handlers.war),
+      CallbackQueryHandler(pattern="LatinosWar", callback=handlers.latinos_war),
+      CallbackQueryHandler(pattern="VzlaWar", callback=handlers.vzla_war)],
+    states={},
+    fallbacks=[],
+  ))
 
   # start the Bot
   updater.start_polling() # verifica si esta recibiendo mensajes

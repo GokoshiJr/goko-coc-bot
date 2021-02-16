@@ -3,7 +3,7 @@ import coc
 async def donaciones(client, clan_tag, negativas):
   try:
     miembros = await client.get_members(clan_tag)
-    desbalanceados = "Los siguientes jugadores presentan un balance nagativo de donaciones: \n\n"
+    desbalanceados = "Los siguientes jugadores presentan un balance negativo de donaciones: \n\n"
     for miembro in miembros:
       balance = miembro.received - miembro.donations
       if (balance <= negativas):
@@ -37,8 +37,8 @@ def war_time(war) -> str:
   time_to_end = war.end_time.time - war.end_time.now
   result = ""  
   if (time_to_end.days == 1):
-    result = f"Tiempo para que inicie: {time_to_start[0]} horas {time_to_start[2:4]} minutos."
+    result = f"Tiempo para que inicie: {time_to_start[0:2]} horas {time_to_start[3:5]} minutos."
   else:    
     time_to_end = str(time_to_end)
-    result = f"Tiempo para que finalice: {time_to_end[0]} horas {time_to_end[2:4]} minutos."
+    result = f"Tiempo para que finalice: {time_to_end[0:2]} horas {time_to_end[3:5]} minutos. \n {time_to_end}"
   return result

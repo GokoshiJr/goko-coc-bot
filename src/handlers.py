@@ -11,7 +11,7 @@ def start(update, context) -> None:
   data = update.effective_user
   user = User(data.first_name, data.last_name, data.username)
   logger.info(user.log("ha iniciado el bot."))
-  actions.escribiendo(update.message.chat) # el bot esta escribiendo
+  actions.escribiendo(update.message.chat)
   update.message.reply_text(f"¡Bienvenido {user.get_name()}!" + actions.START) 
     
 def commands(update, context) -> None:
@@ -26,20 +26,39 @@ def dev_social(update, context) -> None:
   reply_markup=buttons.dev_social_markup)
 
 def balance(update, context) -> None:
-  msg = client.loop.run_until_complete(clash.donaciones(client, keys.LA_TAG, -2000))
   data = update.effective_user
   user = User(data.first_name, data.last_name, data.username)
   logger.info(user.log("solicitó el balance de las donaciones."))
   actions.escribiendo(update.message.chat)
-  update.message.reply_text(msg)
+  update.message.reply_text(text="Verifica el balance de donaciones de",
+  reply_markup=buttons.donaciones_markup)
+
+def callback_balance(update, context) -> None:
+  msg = client.loop.run_until_complete(clash.donaciones(client, keys.LA_TAG, -2000))
+  query = update.callback_query
+  query.answer()
+  query.edit_message_text(text=msg)  
 
 def war(update, context) -> None:
-  msg = client.loop.run_until_complete(clash.war(client, keys.VZLA_TAG))  
   data = update.effective_user
   user = User(data.first_name, data.last_name, data.username)
   logger.info(user.log("solicitó ver el status de guerra del clan."))
   actions.escribiendo(update.message.chat)
-  update.message.reply_text(msg)
+  update.message.reply_text(text="Verifica las guerras actuales de",
+  reply_markup=buttons.war_markup)
+
+def latinos_war(update, context) -> None:
+  msg = client.loop.run_until_complete(clash.war(client, keys.LA_TAG))
+  
+  query = update.callback_query
+  query.answer()
+  query.edit_message_text(text=msg)
+
+def vzla_war(update, context) -> None:
+  msg = client.loop.run_until_complete(clash.war(client, keys.VZLA_TAG))  
+  query = update.callback_query
+  query.answer()
+  query.edit_message_text(text=msg)
 
 def cwl_rules(update, context) -> None:   
   data = update.effective_user
