@@ -17,17 +17,17 @@ dev_github = InlineKeyboardButton(
   text="GitHub", 
   url="https://github.com/GokoshiJr"
 )
-Latinos_Army = InlineKeyboardButton(
+latinos_army_donaciones = InlineKeyboardButton(
   text="Latinos Army",
   callback_data="LatinosArmy",
 )
-Venezuela = InlineKeyboardButton(
-  text="Venezuela (Armil)",
-  callback_data="VzlaWar",
-)
-Latinos_War = InlineKeyboardButton(
+latinos_army_actual_war = InlineKeyboardButton(
   text="Latinos Army",
   callback_data="LatinosWar",
+)
+otro_clan_actual_war = InlineKeyboardButton(
+  text="Otro",
+  callback_data="OtroWar",
 )
 
 # markup
@@ -36,9 +36,9 @@ dev_social_markup = InlineKeyboardMarkup([
   [dev_twitter, dev_github]
 ])
 donaciones_markup = InlineKeyboardMarkup([
-  [Latinos_Army],
+  [latinos_army_donaciones],
 ])
 war_markup = InlineKeyboardMarkup([
-  [Latinos_War],
-  [Venezuela]
+  [latinos_army_actual_war],
+  [otro_clan_actual_war],
 ])

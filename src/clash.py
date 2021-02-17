@@ -3,7 +3,7 @@ import coc
 async def donaciones(client, clan_tag, negativas):
   try:
     miembros = await client.get_members(clan_tag)
-    desbalanceados = "Los siguientes jugadores presentan un balance negativo de donaciones: \n\n"
+    desbalanceados = "Los siguientes jugadores presentan un <b>balance negativo</b> de donaciones: \n\n"
     for miembro in miembros:
       balance = miembro.received - miembro.donations
       if (balance <= negativas):
@@ -13,23 +13,27 @@ async def donaciones(client, clan_tag, negativas):
     result = "Disculpe, hubo un error en la peticion"
   return result  
 
-async def war(client, clan_tag) -> str:
+async def actual_war(client, clan_tag) -> [str, int]:
   try:
     war = await client.get_clan_war(clan_tag)    
     result = \
     f"{war.clan.name} vs {war.opponent.name} ({war.type})" \
     f"\nTamaño: {war.team_size} \nEstatus: {war.state} {war.status} " \
-    f"\nMiembros en guerra: \n{miembros(war.members)} \n" \
-    f"{war_time(war)}"    
+    f"\nMiembros en guerra: \n{members_in_war(war.members)} \n" \
+    f"{war_time(war)}", 1    
   except coc.PrivateWarLog:
-    result = "El clan posee el registro de guerras privado"
+    result = "El clan posee el registro de guerras privado.", -1
+  except:
+    result = "Ese clan tag es erroneo. Indique un clan tag correcto o escriba salir para terminar la conversacion", 0
   return result
 
-def miembros(members) -> str:
+def members_in_war(members) -> str:
   result = ""
+  """ 
   for member in members:
     if not(member.is_opponent):
-      result += f"{member.map_position}. {member.name} TH {member.town_hall} \n"
+      result += f"{member.map_position}. {member.name} TH {member.town_hall} \n" 
+  """
   return result
 
 def war_time(war) -> str:

@@ -18,7 +18,7 @@ if __name__ == "__main__":
 
   # handlers
   dispatcher.add_handler(CommandHandler("start", handlers.start))
-  dispatcher.add_handler(CommandHandler("commands", handlers.commands)) 
+  dispatcher.add_handler(CommandHandler("commands", handlers.list_commands)) 
   dispatcher.add_handler(CommandHandler("dev", handlers.dev_social))
   dispatcher.add_handler(CommandHandler("cwl", handlers.cwl_rules))
 
@@ -30,13 +30,17 @@ if __name__ == "__main__":
     states={},
     fallbacks=[],
   ))
+  WAR_STATE = 0
   dispatcher.add_handler(ConversationHandler(
     entry_points=[
       CommandHandler("war", handlers.war),
-      CallbackQueryHandler(pattern="LatinosWar", callback=handlers.latinos_war),
-      CallbackQueryHandler(pattern="VzlaWar", callback=handlers.vzla_war)],
+      CallbackQueryHandler(pattern="LatinosWar", callback=handlers.cb_latinos_war),
+      CallbackQueryHandler(pattern="OtroWar", callback=handlers.cb_otro_clan_war)
+    ],
     states={      
-      # WAR_STATE:[MessageHandler(Filters.text, handlers.balance)]},
+      WAR_STATE:[
+        MessageHandler(Filters.text, handlers.filter_otro_clan_war)
+      ],
     },
     fallbacks=[],
   ))
