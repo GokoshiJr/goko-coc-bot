@@ -1,7 +1,9 @@
+""" 
 from telegram import ChatAction
 
 def escribiendo(chat) -> None:
-  chat.send_action(action=ChatAction.TYPING, timeout=None)
+  chat.send_action(action=ChatAction.TYPING, timeout=None) 
+"""
 
 # Messages
 

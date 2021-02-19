@@ -14,7 +14,7 @@ def start(update, context) -> None:
   data = update.effective_user
   user = User(data.first_name, data.last_name, data.username)
   logger.info(user.log("ha iniciado el bot."))
-  actions.escribiendo(update.message.chat)
+  
   update.message.reply_text(
     text=f"¡Bienvenido <b>{user.get_name()}!</b>" + actions.START,
     parse_mode="HTML"
@@ -24,7 +24,7 @@ def list_commands(update, context) -> None:
   data = update.effective_user
   user = User(data.first_name, data.last_name, data.username)
   logger.info(user.log("solicitó los comandos."))
-  actions.escribiendo(update.message.chat)
+  
   update.message.reply_text(
     text=actions.COMMANDS,
     parse_mode="HTML"
@@ -45,7 +45,7 @@ def balance(update, context) -> None:
   data = update.effective_user
   user = User(data.first_name, data.last_name, data.username)
   logger.info(user.log("solicitó el balance negativo de donaciones."))
-  actions.escribiendo(update.message.chat)
+  
   update.message.reply_text(
     text=msg,    
     parse_mode="HTML"
@@ -56,7 +56,7 @@ def war(update, context) -> None:
   data = update.effective_user
   user = User(data.first_name, data.last_name, data.username)
   logger.info(user.log("solicitó ver el status de la guerra actual."))
-  actions.escribiendo(update.message.chat)
+  
   update.message.reply_text(
     text=msg,
     parse_mode="HTML",
@@ -67,7 +67,7 @@ def cwl_rules(update, context) -> None:
   data = update.effective_user
   user = User(data.first_name, data.last_name, data.username)
   logger.info(user.log("solicitó ver las reglas de cwl del clan."))
-  actions.escribiendo(update.message.chat)
+  
   update.message.reply_text(
     text=actions.CWL_RULES,
     parse_mode="HTML"
