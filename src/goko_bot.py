@@ -38,9 +38,9 @@ class GokoBot():
 
 SLASH = [
   telegram.BotCommand("start", "Inicia el bot"),
-  telegram.BotCommand("commands", "Muestra un listado de los comandos disponibles"),
-  telegram.BotCommand("cwl", "Muestra las reglas para la clan war league"),
-  telegram.BotCommand("balance", "Muestra los miembros con balance negativo de donaciones"),
-  telegram.BotCommand("war", "Muestra datos sobre la guerra actual"),
+  telegram.BotCommand("commands", "Lista de comandos disponibles"),
+  telegram.BotCommand("cwl", "Reglas de la Clan War League"),
+  telegram.BotCommand("balance", "Miembros con balance negativo de donaciones"),
+  telegram.BotCommand("war", "Datos de la guerra actual"),
   telegram.BotCommand("dev", "Contacta al desarrollador del bot")
 ]
