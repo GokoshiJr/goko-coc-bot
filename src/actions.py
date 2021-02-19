@@ -10,21 +10,22 @@ START = f"\n\nSoy un bot y me encuentro en desarrollo \n\n" \
 
 COMMANDS = f"Lista de comandos que puedes usar:" \
   f"\n\n<b>/commands</b> - Lista de comandos" \
-  f"\n\n<b>/war</b> - Guerra actual" \
+  f"\n\n<b>/cwl</b> - Reglas de la CWL" \
   f"\n\n<b>/balance</b> - Donaciones negativas" \
-  f"\n\n<b>/dev</b> - Contacto con el dev" 
+  f"\n\n<b>/war</b> - Guerra actual" \
+  f"\n\n<b>/dev</b> - Contacto con el desarrollador" 
 
 DEV = "Puedes contactar al desarrollador <b>Julio González</b> mediante:"
 
 RULES = ""
 
-CWL_RULES = f"Sanciones y reglas de liga: \n\n" \
-  f"1-. Atacar en sentido contrario al Th y hacer fail no participa más en toda la liga. \n\n" \
+CWL_RULES = f"<b>Sanciones y reglas de liga:</b> \n\n" \
+  f"1-. Atacar en sentido contrario al TH y hacer fail no participa más en toda la liga. \n\n" \
   f"2-. No hacer un ataque en liga, no participa más en toda la liga. \n\n" \
   f"3-. Hacer un fail 1 guerra, hacer dos fail no participa más en toda la liga. \n\n" \
   f"4-. Decirle al mismo jugador que ataque en reiteradas ocasiones o que no le dé importancia a la liga, " \
   f"no participa hasta que el jugador se manifieste. \n\n" \
-  f"5-. Prohibido hablar mal de algún jugador, si un jugador comete un fail, en vez de atacarlo," \
+  f"5-. Prohibido hablar mal de algún jugador, si un jugador comete un fail, en vez de atacarlo, " \
   f"lo ideal es realizarle una crítica constructiva para que este pueda corregir la falla. \n\n" \
   f"6-. Si algún castillo no está completo 2 hora antes que empiece la guerra se sanciona" \
   f"el jugador al que le corresponda donar. (1G) \n\n" \

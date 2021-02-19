@@ -22,7 +22,16 @@ if __name__ == "__main__":
   dispatcher.add_handler(CommandHandler("dev", handlers.dev_social))
   dispatcher.add_handler(CommandHandler("cwl", handlers.cwl_rules))
   dispatcher.add_handler(CommandHandler("balance", handlers.balance))
-  dispatcher.add_handler(CommandHandler("war", handlers.war))
+  dispatcher.add_handler(ConversationHandler(
+    entry_points=[
+      CommandHandler("war", handlers.war),
+      CallbackQueryHandler(pattern="miembros", callback=handlers.cb_war_members),
+      CallbackQueryHandler(pattern="ataques", callback=handlers.cb_war_attacks),
+      CallbackQueryHandler(pattern="stats", callback=handlers.cb_war),
+      CallbackQueryHandler(pattern="salir", callback=handlers.cb_salir)
+    ],
+    states={}, fallbacks=[]
+  ))
   
   # start the Bot
   updater.start_polling() # verifica si esta recibiendo mensajes

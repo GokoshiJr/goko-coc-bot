@@ -4,8 +4,8 @@ from user import User
 client = coc.login(keys.API_EMAIL, keys.API_PASSWORD)
 
 # Enable logging
-logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO)
-logger = logging.getLogger(__name__+ ".py")
+logging.basicConfig(format='%(name)s - %(levelname)s - %(message)s', level=logging.INFO)
+logger = logging.getLogger(__name__ + ".py")
 
 def start(update, context) -> None:
   data = update.effective_user
@@ -56,7 +56,8 @@ def war(update, context) -> None:
   actions.escribiendo(update.message.chat)
   update.message.reply_text(
     text=msg,
-    parse_mode="HTML"
+    parse_mode="HTML",
+    reply_markup=buttons.war_markup
   )
 
 def cwl_rules(update, context) -> None:   
@@ -68,3 +69,47 @@ def cwl_rules(update, context) -> None:
     text=actions.CWL_RULES,
     parse_mode="HTML"
   )
+
+def cb_war(update, context):
+  msg = client.loop.run_until_complete(clash.actual_war(client, keys.LA_TAG))
+  data = update.effective_user
+  user = User(data.first_name, data.last_name, data.username)
+  logger.info(user.log("solicitó ver el status de la guerra actual."))
+  query = update.callback_query
+  query.answer()  
+  query.edit_message_text(
+    text=msg,
+    parse_mode="HTML",
+    reply_markup=buttons.war_markup
+  )
+
+def cb_war_members(update, context) -> None:
+  msg = client.loop.run_until_complete(clash.members_in_war(client, keys.LA_TAG))
+  data = update.effective_user
+  user = User(data.first_name, data.last_name, data.username)
+  logger.info(user.log("solicitó ver los miembros de la guerra del clan."))
+  query = update.callback_query
+  query.answer()  
+  query.edit_message_text(
+    text=msg,
+    parse_mode="HTML",
+    reply_markup=buttons.ataques_markup
+  )
+
+def cb_war_attacks(update, context) -> None:
+  msg = client.loop.run_until_complete(clash.attacks_in_war(client, keys.LA_TAG))
+  data = update.effective_user
+  user = User(data.first_name, data.last_name, data.username)
+  logger.info(user.log("solicitó ver los ataques de la guerra del clan."))
+  query = update.callback_query
+  query.answer()
+  query.edit_message_text(
+    text=msg,
+    parse_mode="HTML",
+    reply_markup=buttons.miembros_markup
+  )
+
+def cb_salir(update, context) -> None:
+  query = update.callback_query
+  query.answer()
+  query.edit_message_text(text="Fin del mensaje.")
