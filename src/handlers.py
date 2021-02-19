@@ -1,7 +1,10 @@
-import logging, actions, buttons, clash, coc, keys 
+import logging, actions, buttons, clash, coc, os 
 from user import User 
-
-client = coc.login(keys.API_EMAIL, keys.API_PASSWORD)
+from boto.s3.connection import S3Connection
+API_EMAIL = S3Connection(os.environ["API_EMAIL"])
+API_PASSWORD = S3Connection(os.environ["API_PASSWORD"])
+LA_TAG = S3Connection(os.environ["LA_TAG"])
+client = coc.login(API_EMAIL, API_PASSWORD)
 
 # Enable logging
 logging.basicConfig(format='%(name)s - %(levelname)s - %(message)s', level=logging.INFO)
@@ -38,7 +41,7 @@ def dev_social(update, context) -> None:
   )
 
 def balance(update, context) -> None:
-  msg = client.loop.run_until_complete(clash.donaciones(client, keys.LA_TAG, -2000))
+  msg = client.loop.run_until_complete(clash.donaciones(client, LA_TAG, -2000))
   data = update.effective_user
   user = User(data.first_name, data.last_name, data.username)
   logger.info(user.log("solicitó el balance negativo de donaciones."))
@@ -49,7 +52,7 @@ def balance(update, context) -> None:
   )
 
 def war(update, context) -> None:
-  msg = client.loop.run_until_complete(clash.actual_war(client, keys.LA_TAG))
+  msg = client.loop.run_until_complete(clash.actual_war(client, LA_TAG))
   data = update.effective_user
   user = User(data.first_name, data.last_name, data.username)
   logger.info(user.log("solicitó ver el status de la guerra actual."))
@@ -71,7 +74,7 @@ def cwl_rules(update, context) -> None:
   )
 
 def cb_war(update, context):
-  msg = client.loop.run_until_complete(clash.actual_war(client, keys.LA_TAG))
+  msg = client.loop.run_until_complete(clash.actual_war(client, LA_TAG))
   data = update.effective_user
   user = User(data.first_name, data.last_name, data.username)
   logger.info(user.log("solicitó ver el status de la guerra actual."))
@@ -84,7 +87,7 @@ def cb_war(update, context):
   )
 
 def cb_war_members(update, context) -> None:
-  msg = client.loop.run_until_complete(clash.members_in_war(client, keys.LA_TAG))
+  msg = client.loop.run_until_complete(clash.members_in_war(client, LA_TAG))
   data = update.effective_user
   user = User(data.first_name, data.last_name, data.username)
   logger.info(user.log("solicitó ver los miembros de la guerra del clan."))
@@ -97,7 +100,7 @@ def cb_war_members(update, context) -> None:
   )
 
 def cb_war_attacks(update, context) -> None:
-  msg = client.loop.run_until_complete(clash.attacks_in_war(client, keys.LA_TAG))
+  msg = client.loop.run_until_complete(clash.attacks_in_war(client, LA_TAG))
   data = update.effective_user
   user = User(data.first_name, data.last_name, data.username)
   logger.info(user.log("solicitó ver los ataques de la guerra del clan."))

@@ -1,17 +1,19 @@
-import telegram, handlers, keys
+import telegram, handlers, os
 from telegram.ext import Updater, CommandHandler, ConversationHandler, CallbackQueryHandler, MessageHandler, Filters
 from goko_bot import GokoBot, SLASH
+from boto.s3.connection import S3Connection
+BOT_TOKEN = S3Connection(os.environ["BOT_TOKEN"])
 
 if __name__ == "__main__":
   # Initialize the bot
-  bot = telegram.Bot(keys.BOT_TOKEN)
+  bot = telegram.Bot(BOT_TOKEN)
   print(GokoBot(bot.get_me()))
 
   # Set bot rules
   bot.set_my_commands(commands=SLASH)
 
   # updater - to listen de user request
-  updater = Updater(token=keys.BOT_TOKEN, use_context=True)
+  updater = Updater(token=BOT_TOKEN, use_context=True)
 
   # get the dispatcher to register handlers
   dispatcher = updater.dispatcher
