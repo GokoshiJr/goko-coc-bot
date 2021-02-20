@@ -1,3 +1,2 @@
 coc.py==1.1.0
 python-telegram-bot==13.3
-telegram==0.0.1
