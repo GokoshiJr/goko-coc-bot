@@ -5,7 +5,6 @@ name = "pypi"
 
 [packages]
 "coc.py" = "*"
-telegram = "*"
 python-telegram-bot = "*"
 boto3 = "*"
 

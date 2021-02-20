@@ -1,14 +1,22 @@
-""" 
+import telegram
 from telegram import ChatAction
 
 def escribiendo(chat) -> None:
-  chat.send_action(action=ChatAction.TYPING, timeout=None) 
-"""
+  chat.send_action(action=ChatAction.TYPING, timeout=None)
 
 # Messages
 
 START = f"\n\nSoy un bot y me encuentro en desarrollo \n\n" \
   f"Escribe <b>/commands</b> para ver el listado de comandos disponibles."
+
+SLASH = [
+  telegram.BotCommand("start", "Inicia el bot"),
+  telegram.BotCommand("commands", "Lista de comandos disponibles"),
+  telegram.BotCommand("cwl", "Reglas de la Clan War League"),
+  telegram.BotCommand("balance", "Miembros con balance negativo de donaciones"),
+  telegram.BotCommand("war", "Datos de la guerra actual"),
+  telegram.BotCommand("dev", "Contacta al desarrollador del bot")
+]
 
 COMMANDS = f"Lista de comandos que puedes usar:" \
   f"\n\n<b>/commands</b> - Lista de comandos" \

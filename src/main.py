@@ -1,8 +1,9 @@
 import telegram, handlers, os
 from telegram.ext import Updater, CommandHandler, ConversationHandler, CallbackQueryHandler, MessageHandler, Filters
-from goko_bot import GokoBot, SLASH
-from boto.s3.connection import S3Connection
-BOT_TOKEN = S3Connection(os.environ["BOT_TOKEN"])
+from actions import SLASH
+from goko_bot import GokoBot
+
+BOT_TOKEN = os.environ["BOT_TOKEN"]
 
 if __name__ == "__main__":
   # Initialize the bot
