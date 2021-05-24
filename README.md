@@ -1,2 +1,2 @@
 # goko-coc-bot
-Telegram Bot usin the Clash of Clans API - Latinos Army
+Telegram Bot using the Clash of Clans API - Latinos Army
